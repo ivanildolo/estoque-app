@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { EstoqueRoutingModule } from './estoque-routing.module';
 import { EstoqueComponent } from './estoque.component';
+import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MaterialModule } from '../../shared/material/material.module';
 
 
 @NgModule({
@@ -11,7 +14,12 @@ import { EstoqueComponent } from './estoque.component';
   ],
   imports: [
     CommonModule,
-    EstoqueRoutingModule
-  ]
+    EstoqueRoutingModule,
+    MaterialModule
+  ],
+  providers: [
+    provideClientHydration(),
+    provideAnimationsAsync()
+  ],
 })
 export class EstoqueModule { }
