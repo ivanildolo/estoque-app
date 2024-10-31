@@ -1,4 +1,5 @@
 <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+ <div class="fields-container">
   <div class="form-group">
     <label for="productName">Nome do Produto:</label>
     <input
@@ -16,6 +17,7 @@
       class="form-control my-input"
       [ngModel]="firstDate"
       name="firstDate"
+      required
     />
   </div>
   <div class="form-group">
@@ -25,10 +27,21 @@
       class="form-control my-input"
       [ngModel]="lastDate"
       name="lastDate"
+      required
     />
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+    <button color="primary" type="submit" mat-fab extended>
+      <mat-icon>filter_alt</mat-icon>
+      Filtrar
+    </button>
+  </div>
+ </div>
+  <div class="form-group new-product-container">
+    <a type="button" mat-fab extended href="/novo-produto">
+      <mat-icon>save</mat-icon>
+      Novo produto
+    </a>
   </div>
 </form>
 <div *ngIf="isLoading; else content">
@@ -59,9 +72,9 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="item_category">
+    <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef>Categoria</th>
-      <td mat-cell *matCellDef="let product">{{ product.item_category }}</td>
+      <td mat-cell *matCellDef="let product">{{ product.category }}</td>
     </ng-container>
 
     <ng-container matColumnDef="warehouse_location">

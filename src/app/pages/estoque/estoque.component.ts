@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Product } from '@interfaces/product.interface';
 import { ProductService } from '@services/product.service';
+import {MatSnackBar, MatSnackBarRef, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-estoque',
@@ -14,7 +15,7 @@ export class EstoqueComponent implements OnInit {
     'name',
     'description',
     'price',
-    'item_category',
+    'category',
     'warehouse_location',
     'creation_date',
   ];
@@ -22,7 +23,11 @@ export class EstoqueComponent implements OnInit {
   isLoading: boolean = false;
   firstDate: string = '';
   lastDate: string = '';
-  constructor(private productService: ProductService) {}
+
+  constructor(
+    private productService: ProductService,
+    private snackBar: MatSnackBar,
+  ) {}
 
   searchProducts(productName: string, firstDate: string, lastDate: string) {
     this.isLoading = true;
@@ -49,13 +54,21 @@ export class EstoqueComponent implements OnInit {
     this.lastDate = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
   }
 
+  openSnackBar() {
+    this.snackBar.open("Intervalo de datas invalido!");
+  }
+
   ngOnInit(): void {
     this.getIntervalDates();
     this.searchProducts('', this.firstDate, this.lastDate);
   }
 
   onSubmit(form: NgForm) {
+   if(form.valid){
     const filters = form.value;
     this.searchProducts(filters.productName, filters.firstDate, filters.lastDate);
+   }else{
+    this.openSnackBar();
+   }
   }
 }

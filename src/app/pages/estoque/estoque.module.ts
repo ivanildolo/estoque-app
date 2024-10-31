@@ -7,7 +7,6 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from '../../shared/material/material.module';
 
-
 @NgModule({
   declarations: [
     EstoqueComponent

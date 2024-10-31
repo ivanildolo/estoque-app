@@ -9,18 +9,18 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <a mat-menu-item href="/">
         <mat-icon>home</mat-icon>
         <span>Início</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>info</mat-icon>
-        <span>Sobre</span>
-      </button>
-      <button mat-menu-item>
+      </a>
+      <a mat-menu-item href="/novo-produto">
+        <mat-icon>save</mat-icon>
+        <span>Novo produto</span>
+      </a>
+      <a mat-menu-item target="_blank" href="mailto:ivanildosilvalima@gmail.com" title="ivanildosilvalima@gmail.com">
         <mat-icon>contact_mail</mat-icon>
         <span>Contato</span>
-      </button>
+      </a>
     </mat-menu>
   </mat-toolbar>
 
