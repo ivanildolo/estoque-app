@@ -1,34 +1,61 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { Product } from '@interfaces/product.interface';
+import { ProductService } from '@services/product.service';
 
 @Component({
   selector: 'app-estoque',
   templateUrl: './estoque.component.html',
-  styleUrl: './estoque.component.scss'
+  styleUrl: './estoque.component.scss',
 })
-export class EstoqueComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class EstoqueComponent implements OnInit {
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'description',
+    'price',
+    'item_category',
+    'warehouse_location',
+    'creation_date',
+  ];
+  products: Product[] = [];
+  isLoading: boolean = false;
+  firstDate: string = '';
+  lastDate: string = '';
+  constructor(private productService: ProductService) {}
+
+  searchProducts(productName: string, firstDate: string, lastDate: string) {
+    this.isLoading = true;
+    this.productService
+      .searchProducts(firstDate, lastDate, productName)
+      .subscribe(
+        (data) => {
+          this.products = data;
+          this.isLoading = false;
+        },
+        (error) => console.error('Erro:', error)
+      );
+  }
+  getIntervalDates() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+
+    // Primeiro dia do mês
+    this.firstDate = `${year}-${month}-01`;
+
+    // Último dia do mês
+    const lastDay = new Date(year, today.getMonth() + 1, 0).getDate(); // O dia 0 do próximo mês retorna o último dia do mês atual
+    this.lastDate = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
+  }
+
+  ngOnInit(): void {
+    this.getIntervalDates();
+    this.searchProducts('', this.firstDate, this.lastDate);
+  }
+
+  onSubmit(form: NgForm) {
+    const filters = form.value;
+    this.searchProducts(filters.productName, filters.firstDate, filters.lastDate);
+  }
 }

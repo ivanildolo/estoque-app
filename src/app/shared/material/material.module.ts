@@ -8,6 +8,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -20,6 +26,13 @@ const MATERIAL_MODULES = [
   MatIconModule,
   MatPaginatorModule,
   MatSortModule,
+  MatFormFieldModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  FormsModule,
+  ReactiveFormsModule,
 ];
 
 @NgModule({

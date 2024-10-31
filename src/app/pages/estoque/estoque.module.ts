@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EstoqueRoutingModule } from './estoque-routing.module';
@@ -21,5 +21,6 @@ import { MaterialModule } from '../../shared/material/material.module';
     provideClientHydration(),
     provideAnimationsAsync()
   ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class EstoqueModule { }

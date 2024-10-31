@@ -1,3 +1,27 @@
 :host{
   margin: 3rem;
+  form{
+    display: flex;
+    flex-wrap: wrap;
+    .form-group{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0.5rem;
+      input{
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+      }
+      button{
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+  table{
+    margin-top: 1rem;
+  }
+  .load-spinner{
+    margin: 12% auto;
+  }
 }
