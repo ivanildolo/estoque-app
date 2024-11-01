@@ -1,0 +1,22 @@
+:host {
+  margin: 0 1rem;
+  form {
+    width: 50%;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+    .btn-save-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      button {
+        padding: 1.7rem;
+        width: 40%;
+      }
+    }
+  }
+}

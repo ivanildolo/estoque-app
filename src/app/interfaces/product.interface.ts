@@ -1,9 +1,9 @@
 export interface Product {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   price: number;
-  item_category: string;
+  category: string;
   warehouse_location: string;
-  creation_date: string; // usando string para ISO date format
+  creation_date?: string;
 }

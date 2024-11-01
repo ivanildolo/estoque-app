@@ -34,7 +34,7 @@ const MATERIAL_MODULES = [
   MatProgressSpinnerModule,
   FormsModule,
   ReactiveFormsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 ];
 
 @NgModule({

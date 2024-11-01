@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Product } from '@interfaces/product.interface';
 import { ProductService } from '@services/product.service';
-import {MatSnackBar, MatSnackBarRef, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-estoque',
@@ -19,7 +20,7 @@ export class EstoqueComponent implements OnInit {
     'warehouse_location',
     'creation_date',
   ];
-  products: Product[] = [];
+  products!: MatTableDataSource<Product>;
   isLoading: boolean = false;
   firstDate: string = '';
   lastDate: string = '';
@@ -52,6 +53,8 @@ export class EstoqueComponent implements OnInit {
     // Último dia do mês
     const lastDay = new Date(year, today.getMonth() + 1, 0).getDate(); // O dia 0 do próximo mês retorna o último dia do mês atual
     this.lastDate = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
+
+    this.searchProducts('', this.firstDate, this.lastDate);
   }
 
   openSnackBar() {
@@ -60,7 +63,6 @@ export class EstoqueComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIntervalDates();
-    this.searchProducts('', this.firstDate, this.lastDate);
   }
 
   onSubmit(form: NgForm) {
