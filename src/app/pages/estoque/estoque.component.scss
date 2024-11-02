@@ -1,0 +1,35 @@
+:host{
+  margin:0 1rem;
+  form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .fields-container{
+      display: flex;
+      flex-direction: row;
+    }
+    .form-group{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0.5rem;
+      input{
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+      }
+      button, a{
+        margin-top: 1rem;
+        height: 2.4rem;
+      }
+    }
+  }
+  table{
+    margin-top: 1rem;
+  }
+  .load-spinner{
+    margin: 12% auto;
+  }
+  .new-product-container{
+    align-self: flex-end;
+  }
+}
