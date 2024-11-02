@@ -19,6 +19,7 @@ export class EstoqueComponent implements OnInit {
     'category',
     'warehouse_location',
     'creation_date',
+    'actions'
   ];
   products!: MatTableDataSource<Product>;
   isLoading: boolean = false;
