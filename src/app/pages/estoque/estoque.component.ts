@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Product } from '@interfaces/product.interface';
 import { ProductService } from '@services/product.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-estoque',
@@ -19,16 +21,19 @@ export class EstoqueComponent implements OnInit {
     'category',
     'warehouse_location',
     'creation_date',
-    'actions'
+    'actions',
   ];
   products!: MatTableDataSource<Product>;
   isLoading: boolean = false;
   firstDate: string = '';
   lastDate: string = '';
+  isLoadingDeleteProduct: boolean = false;
+  @ViewChild('form') form!: NgForm;
 
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   searchProducts(productName: string, firstDate: string, lastDate: string) {
@@ -58,8 +63,8 @@ export class EstoqueComponent implements OnInit {
     this.searchProducts('', this.firstDate, this.lastDate);
   }
 
-  openSnackBar() {
-    this.snackBar.open("Intervalo de datas invalido!");
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'fechar');
   }
 
   ngOnInit(): void {
@@ -67,11 +72,40 @@ export class EstoqueComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-   if(form.valid){
-    const filters = form.value;
-    this.searchProducts(filters.productName, filters.firstDate, filters.lastDate);
-   }else{
-    this.openSnackBar();
-   }
+    if (form.valid) {
+      const filters = form.value;
+      this.searchProducts(
+        filters.productName,
+        filters.firstDate,
+        filters.lastDate
+      );
+    } else {
+      this.openSnackBar('Intervalo de datas invalido!');
+    }
+  }
+
+  deleteProdut(product: Product): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: `Tem certeza que deseja deletar o produto:${product.name}?`,
+    });
+    dialogRef.afterClosed().subscribe((ok) => {
+      if (ok) {
+        this.isLoadingDeleteProduct = true;
+        this.productService.deleteProduct(product.id!).subscribe({
+          next: () => {
+            this.openSnackBar(
+              `Produto "${product.name}" deletado com sucesso!`
+            );
+            const values = this.form.value;
+            this.searchProducts(values.name, values.startDate, values.endDate);
+            this.isLoadingDeleteProduct = false;
+          },
+          error: () => {
+            this.openSnackBar('Falha ao tentar deletar!');
+            this.isLoadingDeleteProduct = false;
+          },
+        });
+      }
+    });
   }
 }

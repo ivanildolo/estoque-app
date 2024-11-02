@@ -35,7 +35,7 @@ export class CreateProductComponent {
   onSubmit() {
     if (this.productForm.valid) {
       this.isLoading = true;
-      this.productService.saveProduct(this.productForm.value).subscribe({
+      this.productService.createProduct(this.productForm.value).subscribe({
         next: () => {
           this.isLoading = false;
           this.openSnackBar("Produto salvo com sucesso!");
