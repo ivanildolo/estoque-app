@@ -19,11 +19,11 @@ export class EstoqueComponent implements OnInit {
     'description',
     'price',
     'category',
-    'warehouse_location',
-    'creation_date',
+    'location',
+    'created_at',
     'actions',
   ];
-  products!: MatTableDataSource<Product>;
+  products: Product[] = [];
   isLoading: boolean = false;
   firstDate: string = '';
   lastDate: string = '';

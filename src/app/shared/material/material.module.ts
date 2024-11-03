@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -38,7 +40,9 @@ const MATERIAL_MODULES = [
   ReactiveFormsModule,
   MatSnackBarModule,
   MatTooltipModule,
-  MatDialogModule
+  MatDialogModule,
+  MatAutocompleteModule,
+  MatSelectModule
 ];
 
 @NgModule({

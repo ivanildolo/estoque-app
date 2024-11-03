@@ -15,7 +15,7 @@ export class ProductService {
   });
   constructor(private http: HttpClient) { }
 
-  searchProducts(startDate: string, endDate: string, name: string): Observable<any> {
+  searchProducts(startDate: string, endDate: string, name: string): Observable<Product[]> {
 
     const body = {
       startDate: startDate,
@@ -23,7 +23,7 @@ export class ProductService {
       name: name
     };
 
-    return this.http.post(`${this.apiUrl}/search`, body, { headers:this.headers });
+    return this.http.post<Product[]>(`${this.apiUrl}/search`, body, { headers:this.headers });
   }
 
   createProduct(product: Product): Observable<Product> {

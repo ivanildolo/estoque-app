@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './shared/material/material.module';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -21,7 +21,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     CommonModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    AsyncPipe
   ],
   providers: [
     provideClientHydration(),
