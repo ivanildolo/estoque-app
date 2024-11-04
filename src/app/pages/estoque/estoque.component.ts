@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { Product } from '@interfaces/product.interface';
 import { ProductService } from '@services/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
+import { ProductEntryDialogComponent } from '@components/product-entry-dialog/product-entry-dialog.component';
+import { ProductOutDialogComponent } from '@components/product-out-dialog/product-out-dialog.component';
 
 @Component({
   selector: 'app-estoque',
@@ -18,6 +19,7 @@ export class EstoqueComponent implements OnInit {
     'name',
     'description',
     'price',
+    'quantity',
     'category',
     'location',
     'created_at',
@@ -105,6 +107,44 @@ export class EstoqueComponent implements OnInit {
             this.isLoadingDeleteProduct = false;
           },
         });
+      }
+    });
+  }
+
+  stockIn(product: Product): void {
+    const dialogRef = this.dialog.open(ProductEntryDialogComponent, {
+      data: product,
+    });
+    dialogRef.afterClosed().subscribe((ok) => {
+      if (ok && this.form.valid) {
+        const filters = this.form.value;
+        this.isLoading = true;
+        setTimeout(() => {
+          this.searchProducts(
+            filters.productName,
+            filters.firstDate,
+            filters.lastDate
+          );
+        }, 2000);
+      }
+    });
+  }
+
+  stockOut(product: Product): void {
+    const dialogRef = this.dialog.open(ProductOutDialogComponent, {
+      data: product,
+    });
+    dialogRef.afterClosed().subscribe((ok) => {
+      if (ok && this.form.valid) {
+        const filters = this.form.value;
+        this.isLoading = true;
+        setTimeout(() => {
+          this.searchProducts(
+            filters.productName,
+            filters.firstDate,
+            filters.lastDate
+          );
+        }, 2000);
       }
     });
   }

@@ -52,4 +52,24 @@ export class ProductService {
 
     return this.http.get<Product[]>(url, {headers: this.headers});
   }
+
+  stockIn(productId: number, quantity: number): Observable<any> {
+    const url = `${this.apiUrl}/stock-in`;
+    const body = {
+      product_id: productId,
+      quantity: quantity
+    };
+
+    return this.http.post(url, body);
+  }
+
+  stockOut(productId: number, quantity: number): Observable<any> {
+    const url = `${this.apiUrl}/stock-out`;
+    const body = {
+      product_id: productId,
+      quantity: quantity
+    };
+
+    return this.http.post(url, body);
+  }
 }

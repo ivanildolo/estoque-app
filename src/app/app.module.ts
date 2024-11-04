@@ -9,11 +9,15 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ProductEntryDialogComponent } from '@components/product-entry-dialog/product-entry-dialog.component';
+import { ProductOutDialogComponent } from '@components/product-out-dialog/product-out-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ProductEntryDialogComponent,
+    ProductOutDialogComponent
   ],
   imports: [
     BrowserModule,
