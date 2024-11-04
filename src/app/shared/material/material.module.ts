@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -42,7 +43,8 @@ const MATERIAL_MODULES = [
   MatTooltipModule,
   MatDialogModule,
   MatAutocompleteModule,
-  MatSelectModule
+  MatSelectModule,
+  MatExpansionModule
 ];
 
 @NgModule({

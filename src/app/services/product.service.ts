@@ -40,4 +40,16 @@ export class ProductService {
 
     return this.http.delete(url, options);
   }
+
+  getLowStockReport(minQuantity: number): Observable<Product[]> {
+    const url = `${this.apiUrl}/report/low-stock?minQuantity=${minQuantity}`;
+
+    return this.http.get<Product[]>(url, {headers: this.headers});
+  }
+
+  getExcessStockReport(maxQuantity: number): Observable<Product[]> {
+    const url = `${this.apiUrl}/report/excess-stock?maxQuantity=${maxQuantity}`;
+
+    return this.http.get<Product[]>(url, {headers: this.headers});
+  }
 }

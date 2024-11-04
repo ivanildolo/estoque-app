@@ -1,0 +1,103 @@
+<h3>
+  <a href="/" class="text-decoration-none"><mat-icon>home</mat-icon> Estoque /</a>
+  <mat-icon>report</mat-icon>  reports
+</h3>
+<form [formGroup]="formLowStock" (ngSubmit)="onSubmitLowStock()">
+  <div class="header">
+    <h2>Produtos com estoque abaixo do permitido</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Quantidade Minima</mat-label>
+      <input
+        matInput
+        type="number"
+        min="0"
+        formControlName="lowStock"
+        required
+      />
+      <mat-error *ngIf="formLowStock.get('lowStock')?.hasError('required')"
+        >Obrigatório minimo 0</mat-error
+      >
+    </mat-form-field>
+    <button mat-fab matTooltip="Atualizar relatório de estoque minimo">
+      <mat-icon *ngIf="!isLoadingLowStock">update</mat-icon>
+      <mat-icon *ngIf="isLoadingLowStock">downloading</mat-icon>
+    </button>
+  </div>
+  <table *ngIf="productsLowStock.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Categoria</th>
+        <th>Localização</th>
+        <th>Data de Criação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productsLowStock">
+        <td>#{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency : "BRL" }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>{{ product.location }}</td>
+        <td>{{ product.created_at | date : "dd/MM/yyyy" }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="statusMessageLowStock" [class.stock-status-ok]="productsLowStock.length == 0" [class.stock-status-warning]="productsLowStock.length > 0">
+    {{ statusMessageLowStock }}
+  </div>
+</form>
+
+<form [formGroup]="formExcessStock" (ngSubmit)="onSubmitExcessStock()">
+  <div class="header">
+    <h2>Produtos com estoque em excesso acima do permitido</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Quantidade Maxima</mat-label>
+      <input
+        matInput
+        type="number"
+        min="0"
+        formControlName="excessStock"
+        required
+      />
+      <mat-error *ngIf="formExcessStock.get('excessStock')?.hasError('required')"
+        >Obrigatório valor maior ou igaul a 0 </mat-error
+      >
+    </mat-form-field>
+    <button mat-fab matTooltip="Atualizar relatório de estoque em exesso">
+      <mat-icon *ngIf="!isLoadingExcessStock">update</mat-icon>
+      <mat-icon *ngIf="isLoadingExcessStock">downloading</mat-icon>
+    </button>
+  </div>
+  <table *ngIf="productsExcessStock.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th>Categoria</th>
+        <th>Localização</th>
+        <th>Data de Criação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productsExcessStock">
+        <td>#{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency : "BRL" }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>{{ product.location }}</td>
+        <td>{{ product.created_at | date : "dd/MM/yyyy" }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="statusMessageExcessStock" [class.stock-status-ok]="productsExcessStock.length == 0" [class.stock-status-warning]="productsExcessStock.length > 0">
+    {{ statusMessageExcessStock }}
+  </div>
+</form>

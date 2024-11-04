@@ -6,3 +6,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   gap: 1rem;
 }
+h3 mat-icon{
+  position: relative;
+  top: 0.25rem;
+}

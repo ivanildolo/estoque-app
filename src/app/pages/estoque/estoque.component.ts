@@ -40,13 +40,13 @@ export class EstoqueComponent implements OnInit {
     this.isLoading = true;
     this.productService
       .searchProducts(firstDate, lastDate, productName)
-      .subscribe(
-        (data) => {
+      .subscribe({
+        next: (data) => {
           this.products = data;
           this.isLoading = false;
         },
-        (error) => console.error('Erro:', error)
-      );
+        error: (error) => console.error('Erro:', error),
+      });
   }
   getIntervalDates() {
     const today = new Date();

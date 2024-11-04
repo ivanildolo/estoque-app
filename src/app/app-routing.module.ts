@@ -14,6 +14,7 @@ const routes: Routes = [
         (m) => m.CreateProductModule
       ),
   },
+  { path: 'relatorios', loadChildren: () => import('./pages/reports/reports.module').then(m => m.ReportsModule) },
   { path: '**', redirectTo: '/' }
 ];
 
