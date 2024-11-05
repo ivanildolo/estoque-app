@@ -59,6 +59,7 @@
     </table>
 
     <mat-paginator
+      *ngIf="productsLowStock.length > 0"
       [length]="productsLowStock.length"
       [pageSize]="pageSizeLowStock"
       [pageSizeOptions]="[5, 10, 20, 50, 100]"
@@ -130,6 +131,7 @@
       </tbody>
     </table>
     <mat-paginator
+      *ngIf="productsExcessStock.length > 0"
       [length]="productsExcessStock.length"
       [pageSize]="pageSizeExcessStock"
       [pageSizeOptions]="[5, 10, 20, 50, 100]"
