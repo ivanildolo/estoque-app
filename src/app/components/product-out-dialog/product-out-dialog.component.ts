@@ -21,7 +21,7 @@ export class ProductOutDialogComponent {
     private snackBar: MatSnackBar
   ) {
     this.form = this.fb.group({
-      quantity: ['', [Validators.required, Validators.min(1)]],
+      quantity: ['', [Validators.required, Validators.min(1), Validators.max(product.quantity)]],
     });
   }
 
@@ -40,10 +40,9 @@ export class ProductOutDialogComponent {
             this.openSnackBar('Retirada do estoque realizada com sucesso!');
             this.dialogRef.close(true);
           },
-          error: (error) => {
-            console.log(error);
+          error: (response) => {
             this.isLoading = false;
-            this.openSnackBar('Falha ao tentar realizar saida do produto no estoque!');
+            this.openSnackBar(response?.error?.message);
             this.dialogRef.close(false);
           },
         });

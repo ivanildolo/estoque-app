@@ -1,17 +1,17 @@
 
 <mat-toolbar color="primary">
-    <a href="/" class="text-decoration-none">TI Estoque</a>
+    <a href="/" class="title">TI Estoque</a>
 
     <span class="spacer"></span>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button class="menu-mobile" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
       <a mat-menu-item href="/">
         <mat-icon>home</mat-icon>
-        <span>Início</span>
+        <span>Estoque</span>
       </a>
       <a mat-menu-item href="/novo-produto">
         <mat-icon>save</mat-icon>
@@ -26,6 +26,24 @@
         <span>Contato</span>
       </a>
     </mat-menu>
+    <div class="flex menu-desktop">
+      <a mat-menu-item class="text-decoration-none" href="/">
+        <mat-icon>home</mat-icon>
+        <span>Estoque</span>
+      </a>
+        <a mat-menu-item class="text-decoration-none" href="/novo-produto">
+          <mat-icon>save</mat-icon>
+          <span>Novo produto</span>
+        </a>
+        <a mat-menu-item class="text-decoration-none" href="/relatorios">
+          <mat-icon>report</mat-icon>
+          <span>Relatórios</span>
+        </a>
+        <a mat-menu-item class="text-decoration-none" target="_blank" href="mailto:ivanildosilvalima@gmail.com" title="ivanildosilvalima@gmail.com">
+          <mat-icon>contact_mail</mat-icon>
+          <span>Contato</span>
+        </a>
+    </div>
   </mat-toolbar>
 
   <router-outlet />

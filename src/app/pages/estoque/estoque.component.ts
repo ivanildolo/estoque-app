@@ -30,6 +30,11 @@ export class EstoqueComponent implements OnInit {
   firstDate: string = '';
   lastDate: string = '';
   isLoadingDeleteProduct: boolean = false;
+
+  pageIndex: number = 0;
+  pageSize: number = 5;
+
+
   @ViewChild('form') form!: NgForm;
 
   constructor(
@@ -37,6 +42,11 @@ export class EstoqueComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
+
+    onPageChange(event: any) {
+      this.pageIndex = event.pageIndex;
+      this.pageSize = event.pageSize;
+    }
 
   searchProducts(productName: string, firstDate: string, lastDate: string) {
     this.isLoading = true;
@@ -102,8 +112,8 @@ export class EstoqueComponent implements OnInit {
             this.searchProducts(values.name, values.startDate, values.endDate);
             this.isLoadingDeleteProduct = false;
           },
-          error: () => {
-            this.openSnackBar('Falha ao tentar deletar!');
+          error: (error) => {
+            this.openSnackBar(error.message);
             this.isLoadingDeleteProduct = false;
           },
         });

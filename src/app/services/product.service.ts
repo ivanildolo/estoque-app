@@ -26,6 +26,10 @@ export class ProductService {
     return this.http.post<Product[]>(`${this.apiUrl}/search`, body, { headers:this.headers });
   }
 
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}`, { headers:this.headers });
+  }
+
   createProduct(product: Product): Observable<Product> {
 
     return this.http.post<Product>(this.apiUrl, product, { headers: this.headers});

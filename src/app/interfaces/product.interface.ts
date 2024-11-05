@@ -1,4 +1,5 @@
 import { Category } from "./category.interface";
+import { Movement } from "./moviment.interface";
 
 export interface Product {
   id?: number;
@@ -9,4 +10,5 @@ export interface Product {
   category: Category;
   location: string;
   created_at?: string;
+  movements: Movement[];
 }

@@ -7,10 +7,11 @@
     <mat-form-field>
       <mat-label>Quantidade a retirar do estoque</mat-label>
       <mat-icon matTextPrefix>remove</mat-icon>
-      <input formControlName="quantity" type="number" matInput min="1">
+      <input formControlName="quantity" type="number" matInput>
       <mat-error *ngIf="form.get('quantity')?.hasError('required')"
-      >Obrigatório minimo 0</mat-error
-    >
+      >Obrigatório minimo 0</mat-error>
+      <mat-error *ngIf="form.get('quantity')?.hasError('max')"
+      >Disponivel {{product.quantity}}</mat-error>
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>

@@ -4,6 +4,49 @@
   gap: 1rem;
   width: 100%;
   height: 100%;
+  .title{
+    color: #FFD740;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+  }
+.menu-mobile {
+  display: block;
+}
+
+.menu-desktop {
+  display: flex;
+  .mat-mdc-menu-item{
+    overflow: unset;
+    mat-icon{
+      color: #fff;
+    }
+
+  }
+}
+
+/* Media query para telas pequenas, típicas de dispositivos móveis */
+@media (max-width: 767px) {
+  .menu-mobile {
+    display: block; /* Exibe o menu móvel em telas pequenas */
+  }
+
+  .menu-desktop {
+    display: none; /* Esconde o menu desktop em telas pequenas */
+  }
+}
+
+/* Media query para telas maiores, como desktops */
+@media (min-width: 768px) {
+  .menu-mobile {
+    display: none; /* Esconde o menu móvel em telas maiores */
+  }
+
+  .menu-desktop {
+    display: flex; /* Exibe o menu desktop em telas maiores */
+  }
+}
+
   .text-decoration-none {
     text-decoration: none;
     color: #fff;
