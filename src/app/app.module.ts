@@ -5,13 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './shared/material/material.module';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ProductEntryDialogComponent } from '@components/product-entry-dialog/product-entry-dialog.component';
+import { ProductOutDialogComponent } from '@components/product-out-dialog/product-out-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfirmDialogComponent,
+    ProductEntryDialogComponent,
+    ProductOutDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +25,8 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
     CommonModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    AsyncPipe
   ],
   providers: [
     provideClientHydration(),

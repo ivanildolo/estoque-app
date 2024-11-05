@@ -1,3 +1,7 @@
+<h3>
+  <a href="/" class="text-decoration-none"><mat-icon>home</mat-icon> Estoque /</a>
+  <mat-icon>save</mat-icon>  cadastro de produto
+</h3>
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="outline">
     <mat-label>Nome</mat-label>
@@ -20,21 +24,25 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Quantidade</mat-label>
-    <input matInput type="number" formControlName="stock_quantity" required />
-    <mat-error *ngIf="productForm.get('stockQuantity')?.hasError('required')">Quantidade é obrigatório</mat-error>
-    <mat-error *ngIf="productForm.get('stockQuantity')?.hasError('min')">A quantidade minima permitida é 1</mat-error>
+    <input matInput type="number" formControlName="quantity" required />
+    <mat-error *ngIf="productForm.get('quantity')?.hasError('required')">Quantidade é obrigatório</mat-error>
+    <mat-error *ngIf="productForm.get('quantity')?.hasError('min')">A quantidade minima permitida é 1</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Categoria</mat-label>
-    <input matInput formControlName="category" required />
-    <mat-error *ngIf="productForm.get('category')?.hasError('required')">Categoria é obrigatória</mat-error>
+    <mat-select formControlName="category_id">
+      @for (category of categories; track category) {
+        <mat-option [value]="category.id">{{category.name}}</mat-option>
+      }
+    </mat-select>
+    <mat-error *ngIf="productForm.get('category_id')?.hasError('required')">Categoria é obrigatória</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Localização no estoque</mat-label>
-    <input matInput formControlName="warehouse_location" required />
-    <mat-error *ngIf="productForm.get('warehouse_location')?.hasError('required')">Localização é obrigatória</mat-error>
+    <input matInput formControlName="location" required />
+    <mat-error *ngIf="productForm.get('location')?.hasError('required')">Localização é obrigatória</mat-error>
   </mat-form-field>
 
   <div class="btn-save-container">

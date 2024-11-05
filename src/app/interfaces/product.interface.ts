@@ -1,9 +1,14 @@
+import { Category } from "./category.interface";
+import { Movement } from "./moviment.interface";
+
 export interface Product {
   id?: number;
   name: string;
   description: string;
   price: number;
-  category: string;
-  warehouse_location: string;
-  creation_date?: string;
+  quantity: number;
+  category: Category;
+  location: string;
+  created_at?: string;
+  movements: Movement[];
 }

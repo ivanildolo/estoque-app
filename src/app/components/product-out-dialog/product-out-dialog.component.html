@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Retirada de produto do estoque</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<mat-dialog-content>
+  <p><strong>Nome: </strong>{{product.name}}</p>
+  <p><strong>Localização: </strong> {{product.location}}</p>
+  <p><strong>Quantidade em estoque: </strong> {{product.quantity}}</p>
+    <mat-form-field>
+      <mat-label>Quantidade a retirar do estoque</mat-label>
+      <mat-icon matTextPrefix>remove</mat-icon>
+      <input formControlName="quantity" type="number" matInput>
+      <mat-error *ngIf="form.get('quantity')?.hasError('required')"
+      >Obrigatório minimo 0</mat-error>
+      <mat-error *ngIf="form.get('quantity')?.hasError('max')"
+      >Disponivel {{product.quantity}}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button [disabled]="!form.get('quantity')?.valid || isLoading" color="primary" type="submit" mat-fab extended>
+      <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+      <span *ngIf="!isLoading">Salvar</span>
+    </button>
+  </mat-dialog-actions>
+</form>
